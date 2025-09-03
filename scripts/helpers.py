@@ -167,7 +167,6 @@ def get_issues(repository, github):
 
                 # filter issue labels for only status labels
                 status_labels_in_issue = [label.name for label in issue.labels if label.name in STATUS_LABELS]
-
                 assert len(severity_labels_in_issue) == 1, f"Issue {issue.html_url} has more than one (or no) severity label."
                 assert len(status_labels_in_issue) == 1, f"Issue {issue.html_url} has more than one (or no) status label."
                 

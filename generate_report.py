@@ -15,20 +15,33 @@ severity_count_data = helpers.get_severity_counts()
 REPLACE_TITLE = [["__PLACEHOLDER__PROJECT_NAME", summary_data['project_name']],
                  ["__PLACEHOLDER__REPORT_VERSION", summary_data['report_version']]]
 
-source_org, source_repo_name = re.search(r'/(?P<org_name>[^/]+)/([^/.]+)(?:\.git)?$', summary_data['project_github']).groups()
-internal_org, internal_repo_name = re.search(r'/(?P<org_name>[^/]+)/([^/.]+)(?:\.git)?$', summary_data['private_github']).groups()
+source_org, source_repo_name = re.search(r'/(?P<org_name>[^/]+)/([^/.]+)(?:\.git)?$', summary_data['project_github_1']).groups()
+internal_org, internal_repo_name = re.search(r'/(?P<org_name>[^/]+)/([^/.]+)(?:\.git)?$', summary_data['project_github_1']).groups()
+
+# Extract repository names for both repos
+source_org_1, source_repo_name_1 = re.search(r'/(?P<org_name>[^/]+)/([^/.]+)(?:\.git)?$', summary_data['project_github_1']).groups()
+source_org_2, source_repo_name_2 = re.search(r'/(?P<org_name>[^/]+)/([^/.]+)(?:\.git)?$', summary_data['project_github_2']).groups()
 
 # Information from summary_information.conf, inserted in Summary section -> summary.tex file
 REPLACE_SUMMARY = [["__PLACEHOLDER__REVIEW_LENGTH", str(helpers.calculate_period(summary_data['review_timeline']))],
                    ["__PLACEHOLDER__TEAM_NAME", summary_data['team_name']],
                    ["__PLACEHOLDER__TEAM_WEBSITE", summary_data['team_website']],
                    ["__PLACEHOLDER__PROJECT_NAME", summary_data['project_name']],
-                   ["__PLACEHOLDER__REPO_LINK", summary_data['project_github']],
-                   ["__PLACEHOLDER__REPO_NAME", source_repo_name],
-                   ["__PLACEHOLDER__INITIAL_COMMIT_HASH_LINK", re.sub(r'(\.git)?$', '', summary_data['project_github']) + "/blob/" + summary_data['initial_commit_hash']],
-                   ["__PLACEHOLDER__INITIAL_COMMIT_HASH", summary_data['initial_commit_hash']],
-                   ["__PLACEHOLDER__FINAL_COMMIT_HASH_LINK", re.sub(r'(\.git)?$', '', summary_data['project_github']) + "/blob/" + summary_data['final_commit_hash']],
-                   ["__PLACEHOLDER__FINAL_COMMIT_HASH", summary_data['final_commit_hash']],
+                   # Repository 1
+                   ["__PLACEHOLDER__REPO_LINK_1", summary_data['project_github_1']],
+                   ["__PLACEHOLDER__REPO_NAME_1", source_repo_name_1],
+                   ["__PLACEHOLDER__INITIAL_COMMIT_HASH_LINK_1", re.sub(r'(\.git)?$', '', summary_data['project_github_1']) + "/blob/" + summary_data['initial_commit_hash_1']],
+                   ["__PLACEHOLDER__INITIAL_COMMIT_HASH_1", summary_data['initial_commit_hash_1']],
+                   ["__PLACEHOLDER__FINAL_COMMIT_HASH_LINK_1", re.sub(r'(\.git)?$', '', summary_data['project_github_1']) + "/blob/" + summary_data['final_commit_hash_1']],
+                   ["__PLACEHOLDER__FINAL_COMMIT_HASH_1", summary_data['final_commit_hash_1']],
+                   # Repository 2
+                   ["__PLACEHOLDER__REPO_LINK_2", summary_data['project_github_2']],
+                   ["__PLACEHOLDER__REPO_NAME_2", source_repo_name_2],
+                   ["__PLACEHOLDER__INITIAL_COMMIT_HASH_LINK_2", re.sub(r'(\.git)?$', '', summary_data['project_github_2']) + "/blob/" + summary_data['initial_commit_hash_2']],
+                   ["__PLACEHOLDER__INITIAL_COMMIT_HASH_2", summary_data['initial_commit_hash_2']],
+                   ["__PLACEHOLDER__FINAL_COMMIT_HASH_LINK_2", re.sub(r'(\.git)?$', '', summary_data['project_github_2']) + "/blob/" + summary_data['final_commit_hash_2']],
+                   ["__PLACEHOLDER__FINAL_COMMIT_HASH_2", summary_data['final_commit_hash_2']],
+                   # Common audit information
                    ["__PLACEHOLDER__AUDIT_TIMELINE", summary_data['review_timeline']],
                    ["__PLACEHOLDER__AUDIT_METHODS", summary_data['review_methods']]]
 

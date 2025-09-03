@@ -20,9 +20,12 @@ cp -r ./templates/* ./working/
 # FIXME figure out a way to natively do this.
 # On macOS and Linux
 sed -i.bak 's/textbackslash clearpage/clearpage/g' ./working/report.tex
+sed -i.bak 's/textbackslash clearpage/clearpage/g' ./working/audit_scope.tex
 # On github CI, pandoc seems to be generating the following
 sed -i.bak 's/textbackslash{}clearpage/clearpage/g' ./working/report.tex
+sed -i.bak 's/textbackslash{}clearpage/clearpage/g' ./working/audit_scope.tex
 rm ./working/report.tex.bak
+rm ./working/audit_scope.tex.bak
 
 # Adding Needspaces before subsections and subsubsections
 # Maybe 6cm is not the perfect value here, but it works good enough
